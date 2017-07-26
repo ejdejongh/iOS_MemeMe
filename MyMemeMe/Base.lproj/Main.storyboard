@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="139" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zy7-Qx-ilK">
-                                <rect key="frame" x="16" y="72" width="343" height="538"/>
+                                <rect key="frame" x="16" y="64" width="343" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="MemeCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="MemeCell" rowHeight="139" id="HsJ-Xa-NGJ">
@@ -56,10 +56,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="zy7-Qx-ilK" firstAttribute="leading" secondItem="cxp-f4-KzE" secondAttribute="leadingMargin" id="RIk-68-xfO"/>
-                            <constraint firstItem="zy7-Qx-ilK" firstAttribute="top" secondItem="hyU-nY-sK6" secondAttribute="bottom" constant="8" symbolic="YES" id="geQ-iq-1HJ"/>
-                            <constraint firstItem="rlw-wH-But" firstAttribute="top" secondItem="zy7-Qx-ilK" secondAttribute="bottom" constant="8" symbolic="YES" id="iKR-71-dhX"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="zy7-Qx-ilK" secondAttribute="trailing" id="uby-Ze-Xff"/>
+                            <constraint firstItem="rlw-wH-But" firstAttribute="top" secondItem="zy7-Qx-ilK" secondAttribute="bottom" id="TZb-kK-xkQ"/>
+                            <constraint firstItem="zy7-Qx-ilK" firstAttribute="trailing" secondItem="cxp-f4-KzE" secondAttribute="trailingMargin" id="qDG-SE-Btn"/>
+                            <constraint firstItem="zy7-Qx-ilK" firstAttribute="top" secondItem="hyU-nY-sK6" secondAttribute="bottom" id="qkc-4F-3fP"/>
+                            <constraint firstItem="zy7-Qx-ilK" firstAttribute="leading" secondItem="cxp-f4-KzE" secondAttribute="leadingMargin" id="wt3-74-aoQ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="aQH-Lv-QWA" userLabel="Sent Memes">
@@ -86,7 +86,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="X1c-FS-FQc">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="X1c-FS-FQc">
                                 <rect key="frame" x="16" y="28" width="343" height="631"/>
                             </imageView>
                         </subviews>
@@ -247,55 +247,60 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="40" translatesAutoresizingMaskIntoConstraints="NO" id="fzQ-FK-Nod">
-                                <rect key="frame" x="184" y="60" width="8" height="17"/>
+                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="fzQ-FK-Nod">
+                                <rect key="frame" x="16" y="60" width="343" height="17"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="40" translatesAutoresizingMaskIntoConstraints="NO" id="bRF-8N-feE">
-                                <rect key="frame" x="184" y="566" width="8" height="17"/>
+                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="bRF-8N-feE">
+                                <rect key="frame" x="16" y="566" width="343" height="17"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="top" translatesAutoresizingMaskIntoConstraints="NO" id="auO-d7-Xue" userLabel="Actions Toolbar">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kby-DA-ENe" userLabel="Actions Toolbar">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <items>
-                                    <barButtonItem title="Back" id="Rmc-NL-chu" userLabel="Back">
-                                        <connections>
-                                            <segue destination="STm-kK-sQa" kind="show" id="U1o-gC-Kce"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem title="Share" id="hXl-M9-32A" userLabel="Share">
-                                        <connections>
-                                            <action selector="shareImage:" destination="BYZ-38-t0r" id="wbS-EX-zQJ"/>
-                                        </connections>
-                                    </barButtonItem>
+                                    <navigationItem title="Meme Editor" id="djn-Ro-aHj">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="hXl-M9-32A" userLabel="Share">
+                                            <connections>
+                                                <action selector="shareImage:" destination="BYZ-38-t0r" id="wbS-EX-zQJ"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="Rmc-NL-chu" userLabel="Back">
+                                            <connections>
+                                                <segue destination="STm-kK-sQa" kind="show" id="U1o-gC-Kce"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
                                 </items>
-                            </toolbar>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="b8w-4F-a5d" firstAttribute="height" relation="lessThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="height" id="0zV-oN-d4f"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bRF-8N-feE" secondAttribute="trailing" id="23m-A9-OiQ"/>
                             <constraint firstItem="OJ3-QS-7br" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="2dd-ex-4uE"/>
                             <constraint firstItem="OJ3-QS-7br" firstAttribute="top" secondItem="bRF-8N-feE" secondAttribute="bottom" constant="40" id="4JS-pw-9zl"/>
                             <constraint firstItem="b8w-4F-a5d" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6Nm-tk-60q"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="fzQ-FK-Nod" secondAttribute="trailing" id="9RF-Rq-8b5"/>
                             <constraint firstItem="b8w-4F-a5d" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="9g6-ER-E5M"/>
                             <constraint firstAttribute="bottom" secondItem="OJ3-QS-7br" secondAttribute="bottom" symbolic="YES" id="9vO-lC-gMv"/>
                             <constraint firstItem="b8w-4F-a5d" firstAttribute="width" relation="lessThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="width" id="IEO-Hv-DXe"/>
-                            <constraint firstItem="auO-d7-Xue" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Run-Ou-m08"/>
+                            <constraint firstItem="Kby-DA-ENe" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="PSB-ae-OIl"/>
+                            <constraint firstItem="fzQ-FK-Nod" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Pu7-5j-XB4"/>
                             <constraint firstItem="fzQ-FK-Nod" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="TuX-Fv-7SN"/>
                             <constraint firstItem="fzQ-FK-Nod" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="40" id="fMS-eh-AF7"/>
-                            <constraint firstAttribute="trailing" secondItem="auO-d7-Xue" secondAttribute="trailing" id="iSU-ou-dSa"/>
-                            <constraint firstItem="auO-d7-Xue" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="k75-0d-km8"/>
                             <constraint firstAttribute="trailing" secondItem="OJ3-QS-7br" secondAttribute="trailing" id="mmx-Z6-hDP"/>
+                            <constraint firstAttribute="trailing" secondItem="Kby-DA-ENe" secondAttribute="trailing" id="pIF-ki-eVa"/>
+                            <constraint firstItem="bRF-8N-feE" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="ulJ-QC-Cku"/>
+                            <constraint firstItem="Kby-DA-ENe" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="xhB-O4-La9"/>
                             <constraint firstItem="bRF-8N-feE" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="zx3-D0-vyg"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="actionsToolbar" destination="auO-d7-Xue" id="0Sa-AK-ClH"/>
+                        <outlet property="actionsToolbar" destination="Kby-DA-ENe" id="Sc6-uf-WQ5"/>
                         <outlet property="bottomTextField" destination="bRF-8N-feE" id="ulV-hK-Gkg"/>
                         <outlet property="cameraButton" destination="gcB-8C-UKq" id="GVn-gb-sJN"/>
                         <outlet property="imageView" destination="b8w-4F-a5d" id="hh7-bY-SMF"/>

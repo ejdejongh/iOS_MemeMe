@@ -34,19 +34,6 @@ class MemeCollectionViewController: UICollectionViewController {
         flowLayout.minimumInteritemSpacing = space
         flowLayout.minimumLineSpacing = space
         flowLayout.itemSize = CGSize(width: dimension, height: dimension)
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-        //self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        //self.collectionView!.register(MemeCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
-        // Do any additional setup after loading the view.
-        
-        //let appearance = UITabBarItem.appearance()
-        //let attributes: [String: AnyObject] = [NSFontAttributeName:UIFont(name: "American Typewriter", size: 22)!, NSForegroundColorAttributeName: UIColor.orange]
-        //appearance.setTitleTextAttributes(attributes, for: .normal)
     }
 
     // MARK: UICollectionViewDataSource

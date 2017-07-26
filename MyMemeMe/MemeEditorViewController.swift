@@ -5,7 +5,6 @@
 //  Created by Edwin de Jongh on 19/07/2017.
 //  Copyright © 2017 Dev66. All rights reserved.
 //
-// Test commit from XCode
 
 import UIKit
 
@@ -14,7 +13,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     // MARK: outlets
     
     // handle to relevant UI elements
-    @IBOutlet weak var actionsToolbar: UIToolbar!
+    @IBOutlet weak var actionsToolbar: UINavigationBar!
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var topTextField: UITextField!
@@ -22,6 +21,15 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var optionsToolbar: UIToolbar!
     @IBOutlet weak var pickButton: UIBarButtonItem!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
+    
+    // MARK: properties
+    
+    // create textfield properties dictionary to use
+    let memeTextAttributes:[String:Any] = [
+        NSStrokeColorAttributeName: UIColor.black,
+        NSForegroundColorAttributeName: UIColor.white,
+        NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+        NSStrokeWidthAttributeName: -1.0]
     
     // MARK: lifecycle
     
@@ -58,43 +66,37 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     // on load
     override func viewDidLoad() {
         
-        // create textfield properties dictionary to use
-        let memeTextAttributes:[String:Any] = [
-            NSStrokeColorAttributeName: UIColor.black,
-            NSForegroundColorAttributeName: UIColor.white,
-            NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-            NSStrokeWidthAttributeName: -1.0]
-        
-        // set textfield properties
-        self.topTextField.defaultTextAttributes = memeTextAttributes
-        self.bottomTextField.defaultTextAttributes = memeTextAttributes
-        
-        // init textfield texts
-        self.topTextField.text = "TOP";
-        self.bottomTextField.text = "BOTTOM";
-        
-        // set alignment property
-        self.topTextField.textAlignment = NSTextAlignment.center
-        self.bottomTextField.textAlignment = NSTextAlignment.center
-        
-        // set delegates
-        self.topTextField.delegate = self
-        self.bottomTextField.delegate = self
+        // init meme editable text fields
+        configureTextField(textField: self.topTextField, txt: "TOP")
+        configureTextField(textField: self.bottomTextField, txt: "BOTTOM")
     }
+    
+    // helper function for setting up a top or bottom meme text field
+    func configureTextField(textField: UITextField, txt: String) {
+        
+        // set initial text, font attributes, alignment, delegate
+        textField.text = txt
+        textField.defaultTextAttributes = memeTextAttributes
+        textField.textAlignment = NSTextAlignment.center
+        textField.delegate = self
+    }
+
     
     // open foto selection
     @IBAction func pickAnImageFromAlbum(_ sender: Any) {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self as UIImagePickerControllerDelegate & UINavigationControllerDelegate
-        imagePicker.sourceType = .photoLibrary
-        present(imagePicker, animated: true, completion: nil)
+        pickAnImage(src: .photoLibrary)
     }
 
     // open camera app
     @IBAction func pickAnImageFromCamera(_ sender: Any) {
+        pickAnImage(src: .camera)
+    }
+    
+    // helper function picking an image from lbum or camera
+    func pickAnImage(src: UIImagePickerControllerSourceType) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self as UIImagePickerControllerDelegate & UINavigationControllerDelegate
-        imagePicker.sourceType = .camera
+        imagePicker.sourceType = src
         present(imagePicker, animated: true, completion: nil)
     }
     
@@ -144,12 +146,15 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     func keyboardWillShow(_ notification:Notification) {
         
-        view.frame.origin.y -= getKeyboardHeight(notification)
+        if (self.bottomTextField.isFirstResponder) {
+            view.frame.origin.y -= getKeyboardHeight(notification)
+        }
     }
 
     func keyboardWillHide(_ notification:Notification) {
-        
-        view.frame.origin.y += getKeyboardHeight(notification)
+        if (self.bottomTextField.isFirstResponder) {
+            view.frame.origin.y += getKeyboardHeight(notification)
+        }
     }
     
     func getKeyboardHeight(_ notification:Notification) -> CGFloat {
@@ -209,7 +214,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         
         // create the meme
         let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imageView.image!, memedImage: generateMemedImage())
-    
+
         // add it to the memes array in the Application Delegate
         let object = UIApplication.shared.delegate
         let appDelegate = object as! AppDelegate
@@ -235,9 +240,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
                 // dismiss self
                 imageSharer.dismiss(animated: true)
                 
-                // redirect to tab controller start page
-                let start = self.storyboard!.instantiateViewController(withIdentifier: "MemeTabController")
-                self.present(start, animated: true, completion: nil)
+                // dismiss meme editor
+                self.dismiss(animated: true, completion: nil)
                 
             }
         }
