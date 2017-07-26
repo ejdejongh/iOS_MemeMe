@@ -12,7 +12,7 @@ struct Meme {
     
     var topText: String = "TOP"
     var bottomText: String = "BOTTOM"
-    var originalImage: UIImage;
-    var memedImage: UIImage;
+    var originalImage: UIImage
+    var memedImage: UIImage
     
 }

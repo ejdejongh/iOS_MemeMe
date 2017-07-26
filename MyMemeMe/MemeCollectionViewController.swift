@@ -19,6 +19,7 @@ class MemeCollectionViewController: UICollectionViewController {
     
     var memes: [Meme]!
 
+    
     // MARK: lifecycle
     
     override func viewDidLoad() {
@@ -34,6 +35,18 @@ class MemeCollectionViewController: UICollectionViewController {
         flowLayout.minimumInteritemSpacing = space
         flowLayout.minimumLineSpacing = space
         flowLayout.itemSize = CGSize(width: dimension, height: dimension)
+    }
+    
+    // reload table data
+    override func viewDidAppear(_ animated: Bool) {
+        
+        // call super
+        super.viewDidAppear(animated)
+        
+        // reload table data
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        memes = appDelegate.memes
+        self.collectionView?.reloadData()
     }
 
     // MARK: UICollectionViewDataSource

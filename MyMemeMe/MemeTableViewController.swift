@@ -6,7 +6,6 @@
 //  Copyright © 2017 Dev66. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 class MemeTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -15,12 +14,27 @@ class MemeTableViewController: UIViewController, UITableViewDataSource, UITableV
     // MARK: properties
     var memes: [Meme]!
     
+    // MARK: outlets
+    @IBOutlet weak var tableView: UITableView!
+    
     // MARK: life cycle
     
     override func viewDidLoad() {
         
         // call super
         super.viewDidLoad()
+    }
+    
+    // reload table data
+    override func viewDidAppear(_ animated: Bool) {
+        
+        // call super
+        super.viewDidAppear(animated)
+        
+        // reload table data
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        memes = appDelegate.memes
+        self.tableView.reloadData()
     }
     
     // MARK: table delegate protocol functions

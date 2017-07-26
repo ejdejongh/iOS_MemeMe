@@ -71,6 +71,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         configureTextField(textField: self.bottomTextField, txt: "BOTTOM")
     }
     
+    // MARK: UI configuration
+    
     // helper function for setting up a top or bottom meme text field
     func configureTextField(textField: UITextField, txt: String) {
         
@@ -80,7 +82,16 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         textField.textAlignment = NSTextAlignment.center
         textField.delegate = self
     }
-
+    
+    // toggle toolbars
+    func configureBars(hidden:Bool) {
+    
+        // hide toolbar and navbar
+        self.actionsToolbar.isHidden = hidden
+        self.optionsToolbar.isHidden = hidden
+    }
+    
+    // MARK: image selection
     
     // open foto selection
     @IBAction func pickAnImageFromAlbum(_ sender: Any) {
@@ -192,8 +203,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     func generateMemedImage() -> UIImage {
         
         // hide toolbar and navbar
-        self.actionsToolbar.isHidden = true
-        self.optionsToolbar.isHidden = true
+        configureBars(hidden: true)
         
         // render view to an image
         UIGraphicsBeginImageContext(self.view.frame.size)
@@ -202,8 +212,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         UIGraphicsEndImageContext()
         
         // show toolbar and navbar
-        self.actionsToolbar.isHidden = false
-        self.optionsToolbar.isHidden = false
+        configureBars(hidden: false)
         
         // done, return result
         return memedImage
@@ -236,9 +245,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
                 
                 // save meme
                 self.save()
-
-                // dismiss self
-                imageSharer.dismiss(animated: true)
                 
                 // dismiss meme editor
                 self.dismiss(animated: true, completion: nil)

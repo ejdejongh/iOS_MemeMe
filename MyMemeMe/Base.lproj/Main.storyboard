@@ -63,12 +63,15 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="aQH-Lv-QWA" userLabel="Sent Memes">
-                        <barButtonItem key="rightBarButtonItem" title="+" id="Dm8-RM-ZuY" userLabel="Add">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Dm8-RM-ZuY" userLabel="Add">
                             <connections>
                                 <action selector="showMemeEditor:" destination="1y3-nA-dzi" id="j0B-Wc-5rj"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="zy7-Qx-ilK" id="CGq-05-l6y"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pm2-ol-O5n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -185,13 +188,14 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="bww-ho-MEM" userLabel="Sent Memes">
-                        <barButtonItem key="rightBarButtonItem" title="+" id="plt-CM-xwB" userLabel="Add">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="plt-CM-xwB" userLabel="Add">
                             <connections>
                                 <action selector="showMemeEditor:" destination="0N5-V5-OkZ" id="XZC-VU-296"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="collectionView" destination="UgP-bZ-MJE" id="7ad-nW-Dl5"/>
                         <outlet property="flowLayout" destination="1CC-xf-fwf" id="NKG-ZL-v2r"/>
                     </connections>
                 </collectionViewController>
