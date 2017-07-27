@@ -55,7 +55,6 @@ class MemeCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         memes = appDelegate.memes
-        print("count=\(memes.count)")
         return memes.count
     }
 
@@ -67,7 +66,8 @@ class MemeCollectionViewController: UICollectionViewController {
         let meme = self.memes[(indexPath as NSIndexPath).row]
         
         // set meme image for cell
-        cell.imageView?.image = meme.memedImage
+        //cell.imageView?.image = meme.memedImage
+        cell.setupCellWith(meme: meme)
         
         // done
         return cell

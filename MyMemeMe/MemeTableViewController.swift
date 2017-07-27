@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MemeTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MemeTableViewController: UIViewController {
     
     
     // MARK: properties
@@ -37,8 +37,18 @@ class MemeTableViewController: UIViewController, UITableViewDataSource, UITableV
         self.tableView.reloadData()
     }
     
-    // MARK: table delegate protocol functions
-    
+    // show meme editor
+    @IBAction func showMemeEditor(_ sender: Any) {
+        
+        let memeEditor = self.storyboard!.instantiateViewController(withIdentifier: "MemeEditorViewController") as! MemeEditorViewController
+        present(memeEditor, animated: true, completion: nil)
+
+    }
+}
+
+// MARK: UITableViewDataSource
+extension MemeTableViewController: UITableViewDataSource {
+
     // number of rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -60,7 +70,11 @@ class MemeTableViewController: UIViewController, UITableViewDataSource, UITableV
         // done
         return cell
     }
-    
+}
+
+// MARK: UITableViewDelegate
+extension MemeTableViewController: UITableViewDelegate {
+
     // row selected
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -70,11 +84,5 @@ class MemeTableViewController: UIViewController, UITableViewDataSource, UITableV
         self.navigationController!.pushViewController(detailController, animated: true)
     }
     
-    // show meme editor
-    @IBAction func showMemeEditor(_ sender: Any) {
-        
-        let memeEditor = self.storyboard!.instantiateViewController(withIdentifier: "MemeEditorViewController") as! MemeEditorViewController
-        present(memeEditor, animated: true, completion: nil)
-
-    }
 }
+

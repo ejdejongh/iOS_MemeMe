@@ -8,8 +8,8 @@
 
 import UIKit
 
-class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
-
+class MemeEditorViewController: UIViewController, UINavigationControllerDelegate {
+    
     // MARK: outlets
     
     // handle to relevant UI elements
@@ -73,6 +73,11 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     // MARK: UI configuration
     
+    // prevent status bar from overlapping with the top actions toolbar
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     // helper function for setting up a top or bottom meme text field
     func configureTextField(textField: UITextField, txt: String) {
         
@@ -110,37 +115,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         imagePicker.sourceType = src
         present(imagePicker, animated: true, completion: nil)
     }
-    
-    // image selected
-    func imagePickerController(_: UIImagePickerController, didFinishPickingMediaWithInfo: [String : Any]) {
-        
-        // extract selected image
-        if let image = didFinishPickingMediaWithInfo["UIImagePickerControllerOriginalImage"] as? UIImage {
-            
-            // show image
-            imageView.image = image as UIImage
-            
-            // TMP - faster debugging
-            //self.save()
-            //print("TMP Saved")
-            
-            // enable share button
-            self.dismiss(animated: true, completion: { () -> Void in
-                self.shareButton.isEnabled = true
-            })
-        }
-        else {
-            print("Error displaying selected image")
-        }
-    }
-
-    // image selection cancelled
-    func imagePickerControllerDidCancel(_: UIImagePickerController) {
-        
-        // close picker
-        dismiss(animated: true, completion: nil)
-    }
-    
+   
     // MARK: keyboard notifications helper functions
     
     func subscribeToKeyboardNotifications() {
@@ -174,29 +149,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
         return keyboardSize.cgRectValue.height
     }
-    
-    // MARK: Text Field Delegate
 
-    // when the text field get's the focus
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        
-        // if the entered text equals one of the two default texts
-        if (textField.text=="TOP" || textField.text=="BOTTOM") {
-            
-            // clear the text field
-            textField.text = ""
-        }
-        
-        //return self.editingSwitch.isOn
-        return true
-    }
-    
-    // when the text field looses focus
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true;
-    }
-    
     // MARK: Meme object saving, sharing
     
     // generate memed image from current screen
@@ -255,5 +208,69 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         // show dialog
         present(imageSharer, animated: true, completion: nil)
     }
+    
+    // MARK: actions
+    
+    // cancel
+    @IBAction func cancelEditor(_ sender: Any) {
+        
+        // return to previous tab or collection overview
+        self.dismiss(animated: true, completion: nil)
+        
+    }
+    
 }
 
+// MARK: UITextFieldDelegate
+extension MemeEditorViewController: UITextFieldDelegate {
+    
+    // when the text field get's the focus
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        
+        // if the entered text equals one of the two default texts
+        if (textField.text=="TOP" || textField.text=="BOTTOM") {
+            
+            // clear the text field
+            textField.text = ""
+        }
+        
+        //return self.editingSwitch.isOn
+        return true
+    }
+    
+    // when the text field looses focus
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true;
+    }
+}
+
+// MARK: UIImagePickerControllerDelegate
+extension MemeEditorViewController: UIImagePickerControllerDelegate {
+    
+    // image selected
+    func imagePickerController(_: UIImagePickerController, didFinishPickingMediaWithInfo: [String : Any]) {
+        
+        // extract selected image
+        if let image = didFinishPickingMediaWithInfo["UIImagePickerControllerOriginalImage"] as? UIImage {
+            
+            // show image
+            imageView.image = image as UIImage
+                        
+            // enable share button
+            self.dismiss(animated: true, completion: { () -> Void in
+                self.shareButton.isEnabled = true
+            })
+        }
+        else {
+            print("Error displaying selected image")
+        }
+    }
+    
+    // image selection cancelled
+    func imagePickerControllerDidCancel(_: UIImagePickerController) {
+        
+        // close picker
+        dismiss(animated: true, completion: nil)
+    }
+}
